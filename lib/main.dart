@@ -13,21 +13,29 @@ class MusicWidget extends StatefulWidget {
 }
 
 class MusicWidgetState extends State<MusicWidget> {
-  final List<Map<String, dynamic>> Rings = [
-    {"file": "music-1.mp3", "label": "Nokia", "color": Colors.red},
-    {"file": "music-2.mp3", "label": "Samsung", "color": Colors.blue},
-    {"file": "music-3.mp3", "label": "Laptop", "color": Colors.green},
-    {"file": "music-4.mp3", "label": "iPhone", "color": Colors.purple},
-    {"file": "music-5.mp3", "label": "Old Phone", "color": Colors.orange},
-    {"file": "music-6.mp3", "label": "Digital Tone", "color": Colors.teal},
-    {"file": "music-7.mp3", "label": "Classic", "color": Colors.black},
-  ];
-
   final AudioPlayer play = AudioPlayer();
 
-  playAudio(String source) async {
-   
-    await play.play(AssetSource(source));
+  List<String> Names = [
+    "Nokia",
+    "Samsung",
+    "Laptop",
+    "iphone",
+    "Old phone",
+    "Digital",
+    "Classic",
+  ];
+  List<Color> colors = [
+    Colors.red,
+    Colors.blue,
+    Colors.black,
+    Colors.green,
+    Colors.indigo,
+    Colors.orange,
+    Colors.pink,
+  ];
+
+  playAudio(int musicRank) async {
+    await play.play(AssetSource('music-$musicRank.mp3'));
   }
 
   stopAudio() async {
@@ -43,38 +51,36 @@ class MusicWidgetState extends State<MusicWidget> {
           title: Text("Naghamat", style: TextStyle(color: Colors.white)),
           backgroundColor: Color(0xff8902A2),
         ),
-        body:
-           
-            ListView.builder(
-              itemCount: Rings.length,
-              itemBuilder: (context, index) {
-                Map ring = Rings[index];
-                return Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8.0),
-                  child: ElevatedButton(
-                    onPressed: () => playAudio(ring["file"]),
-                    style: ButtonStyle(
-                      shape: WidgetStatePropertyAll<RoundedRectangleBorder>(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadiusGeometry.circular(12),
-                        ),
-                      ),
-                      fixedSize: WidgetStatePropertyAll<Size>(
-                        Size(MediaQuery.of(context).size.width, 100),
-                      ),
-                    ),
-                    child: Text(
-                      ring["label"],
-                      style: TextStyle(
-                        color: ring["color"],
-                        fontSize: 25,
-                        fontWeight: FontWeight.bold,
-                      ),
+        body: ListView.builder(
+          itemCount: 7,
+          itemBuilder: (context, index) {
+            // Map ring = Rings[index];
+            return Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              child: ElevatedButton(
+                onPressed: () => playAudio(index + 1),
+                style: ButtonStyle(
+                  shape: WidgetStatePropertyAll<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadiusGeometry.circular(12),
                     ),
                   ),
-                );
-              },
-            ),
+                  fixedSize: WidgetStatePropertyAll<Size>(
+                    Size(MediaQuery.of(context).size.width, 100),
+                  ),
+                ),
+                child: Text(
+                  Names[index],
+                  style: TextStyle(
+                    color: colors[index],
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            );
+          },
+        ),
       ),
     );
   }
