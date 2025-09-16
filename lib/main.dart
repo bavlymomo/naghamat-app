@@ -54,7 +54,7 @@ class MusicWidgetState extends State<MusicWidget> {
         body: ListView.builder(
           itemCount: 7,
           itemBuilder: (context, index) {
-            // Map ring = Rings[index];
+            
             return Padding(
               padding: const EdgeInsets.symmetric(vertical: 5.0),
               child: ElevatedButton(
@@ -62,7 +62,8 @@ class MusicWidgetState extends State<MusicWidget> {
                 style: ButtonStyle(
                   shape: WidgetStatePropertyAll<RoundedRectangleBorder>(
                     RoundedRectangleBorder(
-                      borderRadius: BorderRadiusGeometry.circular(12),
+                      borderRadius: BorderRadiusGeometry.circular(10),
+                      side: BorderSide(color: Colors.black, width: 2),
                     ),
                   ),
                   fixedSize: WidgetStatePropertyAll<Size>(
@@ -70,7 +71,7 @@ class MusicWidgetState extends State<MusicWidget> {
                   ),
                 ),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Icon(Icons.music_note, color: colors[index]),
                     SizedBox(width: 20),
