@@ -56,7 +56,7 @@ class MusicWidgetState extends State<MusicWidget> {
           itemBuilder: (context, index) {
             // Map ring = Rings[index];
             return Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              padding: const EdgeInsets.symmetric(vertical: 5.0),
               child: ElevatedButton(
                 onPressed: () => playAudio(index + 1),
                 style: ButtonStyle(
@@ -69,13 +69,20 @@ class MusicWidgetState extends State<MusicWidget> {
                     Size(MediaQuery.of(context).size.width, 100),
                   ),
                 ),
-                child: Text(
-                  Names[index],
-                  style: TextStyle(
-                    color: colors[index],
-                    fontSize: 25,
-                    fontWeight: FontWeight.bold,
-                  ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.music_note, color: colors[index]),
+                    SizedBox(width: 20),
+                    Text(
+                      Names[index],
+                      style: TextStyle(
+                        color: colors[index],
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
                 ),
               ),
             );
